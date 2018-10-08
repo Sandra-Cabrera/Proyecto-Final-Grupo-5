@@ -7,12 +7,15 @@ package hotelideal;
 
 import java.sql.Connection;
 import java.sql.Date;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -59,31 +62,61 @@ public class HuespedData {
         }
     }
     
-    /*public List<Alumno> obtenerAlumnos(){
-       ArrayList<Alumno> alumnos = new ArrayList<>();
+    
+    
+    //DEBEMOS AGREGAR ESTE METODO ???
+    
+    
+    /*public List<Huesped> obtenerHuesped(){
+       ArrayList<Huesped> huesped = new ArrayList<>();
             
 
         try {
-            String sql = "SELECT * FROM alumno;";
+            String sql = "SELECT * FROM huesped;";
             PreparedStatement statement = connection.prepareStatement(sql);
             ResultSet resultSet = statement.executeQuery();
-            Alumno alumno;
+            Huesped huesped;
             while(resultSet.next()){
-                alumno = new Alumno();
-                alumno.setId(resultSet.getInt("id"));
-                alumno.setNombre(resultSet.getString("nombre"));
-                alumno.setFecNac(resultSet.getDate("fecNac").toLocalDate());
-                alumno.setActivo(resultSet.getBoolean("activo"));
-
-                alumnos.add(alumno);
+                huesped = new Huesped();
+                huesped.setId_huesped(resultSet.getInt("id_huesped"));
+                huesped.setNombre(resultSet.getString("nombre"));
+                huesped.setDni(resultSet.getInt("dni"));
+                huesped.setDomicilio(resultSet.getString("domicilio"));
+                huesped.setCorreo(resultSet.getString("correo"));
+                huesped.setCelular(resultSet.getInt("celular"));
+    
+                huesped.add(huesped);
             }      
             statement.close();
         } catch (SQLException ex) {
-            System.out.println("Error al obtener los alumnos: " + ex.getMessage());
+            System.out.println("Error al obtener los huespedes: " + ex.getMessage());
         }
         
         
-        return alumnos;
+        return huesped;
     }*/
     
+     //DELETE
+     {
+        
+    String url = "jdbc:mysql://localhost/hotelidealgrupo5";
+    String usuario="root";
+    String password="";
+    Connection conexion;
+    PreparedStatement ps;
+    try {
+            Class.forName("org.mariadb.jdbc.Driver");
+            conexion = DriverManager.getConnection(url,usuario,password);
+     
+        ps=conexion.prepareStatement("DELETE FROM huesped WHERE id_huesped = ?;");
+           ps.setInt(1, 2);
+           ps.executeUpdate();
+           ps.close();   
+           
+        }catch (ClassNotFoundException ex) {
+            Logger.getLogger(HotelIdeal.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(HotelIdeal.class.getName()).log(Level.SEVERE, null, ex);
+        }
 }
+    }
