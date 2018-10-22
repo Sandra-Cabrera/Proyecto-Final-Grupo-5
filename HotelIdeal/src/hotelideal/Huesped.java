@@ -87,14 +87,4 @@ public class Huesped {
         this.celular = celular;
     }
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
 }

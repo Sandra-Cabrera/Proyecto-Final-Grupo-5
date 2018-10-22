@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 
 package hotelideal;
 
@@ -20,45 +20,31 @@ public class HotelIdeal {
         }
      
         huespedData = new HuespedData(conexion);
-        Huesped huesped = new Huesped("Pedro Alvarez",56777888,"San Martin s/n","pedro@ulp.edu.ar",266498765);
+        Huesped huesped = new Huesped("Pablo Alvarez",36777888,"Rivadavia 550","pabloa@ulp.edu.ar",266498766);
         huespedData.guardarHuesped(huesped);
-        
-        
-        
-         /*Conexion conexion;
-        Huesped huesped = new Huesped("Sandra",1733344,"Las cañitas","sandra@gmail.com",26645566);
-        try {
-            conexion = new Conexion("jdbc:mysql://localhost/hotel ideal grupo 5", "root", "");
-            HuespedData huespedData = new HuespedData(conexion);
-            huespedData.guardarHuesped(huesped);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(HotelIdeal.class.getName()).log(Level.SEVERE, null, ex);
-        } */
         
          
     }
     
 }
-=======
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
- */
+ 
 package hotelideal;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
  *
  * @author Usuario
- */
-public class HotelIdeal {
 
-    /**
+public class HotelIdeal {
+    
      * @param args the command line arguments
-     */
+    
     public static void main(String[] args) {
         // TODO code application logic here
         Conexion conexion;
@@ -73,5 +59,4 @@ public class HotelIdeal {
         
     }
     
-}
->>>>>>> 6405f3f879e4f7c188f58af1c830e45536ffb02c
+} */
