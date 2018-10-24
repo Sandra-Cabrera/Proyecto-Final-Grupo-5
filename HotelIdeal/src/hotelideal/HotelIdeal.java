@@ -2,16 +2,19 @@
 
 package hotelideal;
 
+import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 
+
 public class HotelIdeal {
 
-    
-    public static void main(String[] args) {
-        
-        HuespedData huespedData = null;
+    public static void main(String[] args){
+  
+       HuespedData huespedData = null;
         Conexion conexion = null;
         try {
             conexion = new Conexion("jdbc:mysql://localhost/hotelidealgrupo5", "root","");
@@ -23,10 +26,10 @@ public class HotelIdeal {
         Huesped huesped = new Huesped("Pablo Alvarez",36777888,"Rivadavia 550","pabloa@ulp.edu.ar",266498766);
         huespedData.guardarHuesped(huesped);
         
-         
     }
-    
 }
+    
+
 
 /*
  * To change this license header, choose License Headers in Project Properties.
