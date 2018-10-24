@@ -168,51 +168,26 @@ public class TipoDeHabitacionData {
         return tipoDeHabitacion;
     } 
     
-    public TipoDeHabitacion buscarTipoDeHabitacion(int id_tipo_de_habitacion){
-    TipoDeHabitacion tipoDeHabitacion =null;
-    try {
-            
-            String sql = "SELECT * FROM tipoDeHabitacion WHERE id_tipo_de_habitacion =?;";
-
-            PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            statement.setInt(1, id_tipo_de_habitacion);
-           
-            
-            ResultSet resultSet=statement.executeQuery();
-            
-            while(resultSet.next()){
-                tipoDeHabitacion = new TipoDeHabitacion();
-                tipoDeHabitacion.setId_tipo_de_habitacion(resultSet.getInt("id_tipo_de_habitacion"));
-                tipoDeHabitacion.setTipo(resultSet.getString("tipo"));
-                tipoDeHabitacion.setMax_personas(resultSet.getInt("max_personas"));
-                tipoDeHabitacion.setCant_camas(resultSet.getInt("cant_camas"));
-                tipoDeHabitacion.setTipo_camas(resultSet.getString("tipo_camas"));
-                tipoDeHabitacion.setPrecio_noche(resultSet.getDouble("precio_noche"));
-
-                
-            }      
-            statement.close();
-            
-        }
-}
-    
-       public int cambiar_precio(Double precio_nuevo){
+   public void cambiarPrecio(TipoDeHabitacion tipoDeHabitacion){
          
         try {
              
-             String sql = "UPDATE tipoDeHabitacion SET precio_noche = ?  WHERE precio_noche = precio_nuevo ;";
+             String sql = "UPDATE tipoDeHabitacion SET tipo = ? , max_personas = ? , cant_camas = ? , tipo_camas = ? , precio_noche = ? WHERE id_tipo_de_habitacion = ? ;";
              
              PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
              
-             
-                statement.setDouble(1,precio_nuevo.getPrecio_noche());
-
+                statement.setString(1, tipoDeHabitacion.getTipo());
+                statement.setInt(2, tipoDeHabitacion.getMax_personas());
+                statement.setInt(3, tipoDeHabitacion.getCant_camas());
+                statement.setString(4, tipoDeHabitacion.getTipo_camas());
+                statement.setDouble(5, tipoDeHabitacion.getPrecio_noche());
+                statement.setInt(6, tipoDeHabitacion.getId_tipo_de_habitacion());
                 statement.executeUpdate();
           
                 statement.close();
                 
         } catch (SQLException ex) {
-            System.out.println("Error al actualizar  un precio por noche: " + ex.getMessage());
+            System.out.println("Error al actualizar el precio del Tipo de Habitacion: " + ex.getMessage());
         }
         
     }
