@@ -14,18 +14,21 @@ public class Habitacion {
     private int numero;
     private int piso;
     private Boolean estado;
+    private TipoDeHabitacion tipoDeHabitacion;
 
-    public Habitacion(int id_habitacion, int numero, int piso, Boolean estado) {
+    public Habitacion(int id_habitacion, int numero, int piso, Boolean estado, TipoDeHabitacion tipoDeHabitacion) {
         this.id_habitacion = id_habitacion;
         this.numero = numero;
         this.piso = piso;
         this.estado = estado;
+        this.tipoDeHabitacion = tipoDeHabitacion;
     }
 
-    public Habitacion(int numero, int piso, Boolean estado) {
+    public Habitacion(int numero, int piso, Boolean estado, TipoDeHabitacion tipoDeHabitacion ) {
         this.numero = numero;
         this.piso = piso;
         this.estado = estado;
+        this.tipoDeHabitacion = tipoDeHabitacion;
     }
 
      public Habitacion() {
@@ -62,6 +65,14 @@ public class Habitacion {
 
     public void setEstado(Boolean estado) {
         this.estado = estado;
+    }
+    
+    public TipoDeHabitacion getTipodeHabitacion() {
+        return tipoDeHabitacion;
+    }
+    
+    public void setTipoDeHabitacion(TipoDeHabitacion tipoDeHabitacion) {
+        this.tipoDeHabitacion = tipoDeHabitacion;
     }
     
     

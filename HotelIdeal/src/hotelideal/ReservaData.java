@@ -123,7 +123,6 @@ public class ReservaData {
                 statement.setDate(2, reserva.getEgreso());
                 statement.setDouble(3, reserva.getImporte_total());
                 statement.setBoolean(4, reserva.getEstado());
-                statement.setInt(5, reserva.getId_reserva());
                 statement.executeUpdate();
           
                 statement.close();
@@ -150,44 +149,9 @@ public class ReservaData {
             while(resultSet.next()){
                 reserva = new Reserva();
                 reserva.setId_reserva(resultSet.getInt("id_reserva"));
-                reserva.setIngreso(resultSet.getDate("ingreso"));
+                reserva.setIngreso(resultSet.getDate("ingreso")); 
                 reserva.setEgreso(resultSet.getDate("egreso"));
                 reserva.setImporte_total(resultSet.getDouble("importe_total"));
-                reserva.setEstado(resultSet.getBoolean("estado"));
-               
-
-                
-            }      
-            statement.close();
-            
-        } catch (SQLException ex) {
-            System.out.println("Error al buscar una reserva: " + ex.getMessage());
-        }
-        
-        return reserva;
-    }
-    
-     public Reserva buscarReservaPorHuesped(String nombre){
-    Reserva reserva =null;
-    try {
-            
-            String sql = "SELECT * FROM reserva WHERE reserva.id_huesped =huesped.id_huesped AND huesped.nombre LIKE nombre;";
-
-            PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            statement.setString(1, nombre);
-           
-            
-            ResultSet resultSet=statement.executeQuery();
-            
-            while(resultSet.next()){
-                reserva = new Reserva();
-                reserva.setId_reserva(resultSet.getInt("id_reserva"));
-                reserva.setIngreso(resultSet.getDate("ingreso"));
-                reserva.setEgreso(resultSet.getDate("egreso"));
-                reserva.setImporte_total(resultSet.getDouble("importe_total"));
-                reserva.setEstado(resultSet.getBoolean("estado"));
-               
-
                 
             }      
             statement.close();
@@ -198,12 +162,42 @@ public class ReservaData {
         
         return reserva;
     }
-     
-       public Reserva buscarReservaPorDni(int dni){
+    
+    
+    public Reserva buscarReservaPorHuesped(String nombre){
     Reserva reserva =null;
     try {
             
-            String sql = "SELECT * FROM reserva WHERE reserva.id_huesped =huesped.id_huesped AND huesped.dni = dni;";
+            String sql = "SELECT * FROM reserva WHERE reserva.id_huesped = huesped.id_huesped AND huesped.nombre LIKE nombre ;";
+
+            PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            statement.setString(1, nombre);
+           
+            
+            ResultSet resultSet=statement.executeQuery();
+            
+            while(resultSet.next()){
+                reserva = new Reserva();
+                reserva.setId_reserva(resultSet.getInt("id_reserva"));
+                reserva.setIngreso(resultSet.getDate("ingreso")); 
+                reserva.setEgreso(resultSet.getDate("egreso"));
+                reserva.setImporte_total(resultSet.getDouble("importe_total"));
+                
+            }      
+            statement.close();
+            
+        } catch (SQLException ex) {
+            System.out.println("Error al buscar una reserva por huesped: " + ex.getMessage());
+        }
+        
+        return reserva;
+    }
+    
+    public Reserva buscarReservaPorDni(int dni){
+    Reserva reserva =null;
+    try {
+            
+            String sql = "SELECT * FROM reserva WHERE reserva.id_huesped = huesped.id_huesped AND huesped.dni = dni ;";
 
             PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             statement.setInt(1, dni);
@@ -214,33 +208,27 @@ public class ReservaData {
             while(resultSet.next()){
                 reserva = new Reserva();
                 reserva.setId_reserva(resultSet.getInt("id_reserva"));
-                reserva.setIngreso(resultSet.getDate("ingreso"));
+                reserva.setIngreso(resultSet.getDate("ingreso")); 
                 reserva.setEgreso(resultSet.getDate("egreso"));
                 reserva.setImporte_total(resultSet.getDouble("importe_total"));
-                reserva.setEstado(resultSet.getBoolean("estado"));
-               
-
                 
             }      
             statement.close();
             
         } catch (SQLException ex) {
-            System.out.println("Error al buscar una reserva por DNI: " + ex.getMessage());
+            System.out.println("Error al buscar una reserva por dni: " + ex.getMessage());
         }
         
         return reserva;
     }
     
-    
-   public int cant_dias() throws ParseException {
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
- 
-		java.util.Date ingreso=dateFormat.parse("2016-02-12");
-		java.util.Date egreso=dateFormat.parse("2016-03-22");
- 
-		int cant_dias=(int) ((egreso.getTime()-ingreso.getTime())/86400000);
-         return cant_dias;
- 
-		
-   }
+    public int cant_dias() throws ParseException {
+        SimpleDateFormat dateFormat = new SimpleDateFormat ("yyyy-MM-dd");
+        
+        java.util.Date ingreso=dateFormat.parse("2016-02-12");
+        java.util.Date egreso=dateFormat.parse("2016-03-22");
+        
+        int cant_dias=(int)  ((egreso.getTime()-ingreso.getTime())/86400000);
+        return cant_dias;
+    }
 }

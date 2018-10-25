@@ -111,7 +111,7 @@ public class TipoDeHabitacionData {
     }
     
     
-    public void actualizarTipoDeHabitacion(TipoDeHabitacion tipoDeHabitacion){
+    public void cambiarPrecio(TipoDeHabitacion tipoDeHabitacion){
          
         try {
              
@@ -130,17 +130,18 @@ public class TipoDeHabitacionData {
                 statement.close();
                 
         } catch (SQLException ex) {
-            System.out.println("Error al actualizar un Tipo De Habitacion: " + ex.getMessage());
+            System.out.println("Error al actualizar el precio del Tipo De Habitacion: " + ex.getMessage());
         }
         
     }
     
+  
     
     public TipoDeHabitacion buscarTipoDeHabitacion(int id_tipo_de_habitacion){
     TipoDeHabitacion tipoDeHabitacion =null;
     try {
             
-            String sql = "SELECT * FROM tipoDeHabitacion WHERE id_tipo_de_habitacion =?;";
+            String sql = "SELECT * FROM tipoDeHabitacion WHERE id_tipo_de_habitacion = ? ;";
 
             PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             statement.setInt(1, id_tipo_de_habitacion);
@@ -166,30 +167,5 @@ public class TipoDeHabitacionData {
         }
         
         return tipoDeHabitacion;
-    } 
-    
-   public void cambiarPrecio(TipoDeHabitacion tipoDeHabitacion){
-         
-        try {
-             
-             String sql = "UPDATE tipoDeHabitacion SET tipo = ? , max_personas = ? , cant_camas = ? , tipo_camas = ? , precio_noche = ? WHERE id_tipo_de_habitacion = ? ;";
-             
-             PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-             
-                statement.setString(1, tipoDeHabitacion.getTipo());
-                statement.setInt(2, tipoDeHabitacion.getMax_personas());
-                statement.setInt(3, tipoDeHabitacion.getCant_camas());
-                statement.setString(4, tipoDeHabitacion.getTipo_camas());
-                statement.setDouble(5, tipoDeHabitacion.getPrecio_noche());
-                statement.setInt(6, tipoDeHabitacion.getId_tipo_de_habitacion());
-                statement.executeUpdate();
-          
-                statement.close();
-                
-        } catch (SQLException ex) {
-            System.out.println("Error al actualizar el precio del Tipo de Habitacion: " + ex.getMessage());
-        }
-        
     }
-    
 }
