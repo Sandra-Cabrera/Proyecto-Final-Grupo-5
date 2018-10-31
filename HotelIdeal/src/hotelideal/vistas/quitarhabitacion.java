@@ -7,7 +7,10 @@ package hotelideal.vistas;
 
 import hotelideal.Conexion;
 import hotelideal.HabitacionData;
+import java.beans.PropertyVetoException;
 import java.sql.PreparedStatement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -113,6 +116,11 @@ public class quitarhabitacion extends javax.swing.JInternalFrame {
 
     private void cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarActionPerformed
         // TODO add your handling code here:
+          try {
+            this.setClosed(true);
+        } catch (PropertyVetoException ex) {
+            Logger.getLogger(quitarhabitacion.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_cancelarActionPerformed
 
 

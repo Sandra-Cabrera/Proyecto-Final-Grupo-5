@@ -7,6 +7,9 @@ package hotelideal.vistas;
 
 import hotelideal.Conexion;
 import hotelideal.HabitacionData;
+import java.beans.PropertyVetoException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 /**
@@ -127,6 +130,11 @@ private HabitacionData habitacionData;
 
     private void cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarActionPerformed
         // TODO add your handling code here:
+          try {
+            this.setClosed(true);
+        } catch (PropertyVetoException ex) {
+            Logger.getLogger(listadodehabitaciones.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_cancelarActionPerformed
 
     private void BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarActionPerformed

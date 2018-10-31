@@ -142,6 +142,11 @@ private HabitacionData habitacionData;
 
     private void CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelarActionPerformed
         // TODO add your handling code here:
+          try {
+            this.setClosed(true);
+        } catch (PropertyVetoException ex) {
+            Logger.getLogger(modificarhabitacion.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_CancelarActionPerformed
 
     private void ModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModificarActionPerformed
