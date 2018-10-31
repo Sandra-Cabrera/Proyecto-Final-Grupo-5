@@ -36,7 +36,7 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="nuevareserva">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Nueva Reserva"/>
+                <Property name="text" type="java.lang.String" value="Nueva"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="nuevareservaActionPerformed"/>
@@ -44,18 +44,10 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="modificarreserva">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Modificar Reserva"/>
+                <Property name="text" type="java.lang.String" value="Modificar/Cancelar"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="modificarreservaActionPerformed"/>
-              </Events>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="cancelarreserva">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Cancelar Reserva"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cancelarreservaActionPerformed"/>
               </Events>
             </MenuItem>
           </SubComponents>
@@ -67,7 +59,7 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="listadohabitaciones">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Listado de Habitaciones"/>
+                <Property name="text" type="java.lang.String" value="Listado"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="listadohabitacionesActionPerformed"/>
@@ -75,17 +67,20 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="nuevahabitacion">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Nueva Habitaci&#xf3;n"/>
+                <Property name="text" type="java.lang.String" value="Nueva"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="nuevahabitacionActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="modificarhabitacion">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Modificar Habitaci&#xf3;n"/>
+                <Property name="text" type="java.lang.String" value="Modificar"/>
               </Properties>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="borrarhabitacion">
+            <MenuItem class="javax.swing.JMenuItem" name="quitarhabitacion">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Borrar Habitaci&#xf3;n"/>
+                <Property name="text" type="java.lang.String" value="Borrar"/>
               </Properties>
             </MenuItem>
           </SubComponents>
@@ -95,10 +90,13 @@
             <Property name="text" type="java.lang.String" value="Huesped"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="listadohuesped">
+            <MenuItem class="javax.swing.JMenuItem" name="VistaHuespedes">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Listado de Huesped"/>
+                <Property name="text" type="java.lang.String" value="Actualizaci&#xf3;n de Datos"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="VistaHuespedesActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>
@@ -173,7 +171,7 @@
         <Component class="javax.swing.JLabel" name="jLabel1">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/imagenes/xcr0l2z1enmgxeycfxew.jpg"/>
+              <Image iconType="3" name="/Imagen/ImagenFondo.jpg"/>
             </Property>
             <Property name="text" type="java.lang.String" value="jLabel1"/>
           </Properties>

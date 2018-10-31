@@ -38,14 +38,13 @@ public class panelprincipal extends javax.swing.JFrame {
         reserva = new javax.swing.JMenu();
         nuevareserva = new javax.swing.JMenuItem();
         modificarreserva = new javax.swing.JMenuItem();
-        cancelarreserva = new javax.swing.JMenuItem();
         habitacion = new javax.swing.JMenu();
         listadohabitaciones = new javax.swing.JMenuItem();
         nuevahabitacion = new javax.swing.JMenuItem();
         modificarhabitacion = new javax.swing.JMenuItem();
-        borrarhabitacion = new javax.swing.JMenuItem();
+        quitarhabitacion = new javax.swing.JMenuItem();
         huesped = new javax.swing.JMenu();
-        listadohuesped = new javax.swing.JMenuItem();
+        VistaHuespedes = new javax.swing.JMenuItem();
         contacto = new javax.swing.JMenu();
 
         jMenuItem5.setText("jMenuItem5");
@@ -54,7 +53,7 @@ public class panelprincipal extends javax.swing.JFrame {
 
         escritorio.setPreferredSize(new java.awt.Dimension(700, 442));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/xcr0l2z1enmgxeycfxew.jpg"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/ImagenFondo.jpg"))); // NOI18N
         jLabel1.setText("jLabel1");
 
         escritorio.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -81,7 +80,7 @@ public class panelprincipal extends javax.swing.JFrame {
         reserva.setBackground(new java.awt.Color(204, 153, 0));
         reserva.setText("Reserva");
 
-        nuevareserva.setText("Nueva Reserva");
+        nuevareserva.setText("Nueva");
         nuevareserva.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nuevareservaActionPerformed(evt);
@@ -89,7 +88,7 @@ public class panelprincipal extends javax.swing.JFrame {
         });
         reserva.add(nuevareserva);
 
-        modificarreserva.setText("Modificar Reserva");
+        modificarreserva.setText("Modificar/Cancelar");
         modificarreserva.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 modificarreservaActionPerformed(evt);
@@ -97,19 +96,11 @@ public class panelprincipal extends javax.swing.JFrame {
         });
         reserva.add(modificarreserva);
 
-        cancelarreserva.setText("Cancelar Reserva");
-        cancelarreserva.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cancelarreservaActionPerformed(evt);
-            }
-        });
-        reserva.add(cancelarreserva);
-
         jMenuBar1.add(reserva);
 
         habitacion.setText("Habitación");
 
-        listadohabitaciones.setText("Listado de Habitaciones");
+        listadohabitaciones.setText("Listado");
         listadohabitaciones.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 listadohabitacionesActionPerformed(evt);
@@ -117,21 +108,31 @@ public class panelprincipal extends javax.swing.JFrame {
         });
         habitacion.add(listadohabitaciones);
 
-        nuevahabitacion.setText("Nueva Habitación");
+        nuevahabitacion.setText("Nueva");
+        nuevahabitacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nuevahabitacionActionPerformed(evt);
+            }
+        });
         habitacion.add(nuevahabitacion);
 
-        modificarhabitacion.setText("Modificar Habitación");
+        modificarhabitacion.setText("Modificar");
         habitacion.add(modificarhabitacion);
 
-        borrarhabitacion.setText("Borrar Habitación");
-        habitacion.add(borrarhabitacion);
+        quitarhabitacion.setText("Borrar");
+        habitacion.add(quitarhabitacion);
 
         jMenuBar1.add(habitacion);
 
         huesped.setText("Huesped");
 
-        listadohuesped.setText("Listado de Huesped");
-        huesped.add(listadohuesped);
+        VistaHuespedes.setText("Actualización de Datos");
+        VistaHuespedes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                VistaHuespedesActionPerformed(evt);
+            }
+        });
+        huesped.add(VistaHuespedes);
 
         jMenuBar1.add(huesped);
 
@@ -156,14 +157,38 @@ public class panelprincipal extends javax.swing.JFrame {
 
     private void listadohabitacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listadohabitacionesActionPerformed
         // TODO add your handling code here:
+        escritorio.removeAll();
+        escritorio.repaint();
+        listadodehabitaciones vh=new listadodehabitaciones();
+        vh.setVisible(true);
+        vh.setLocation(200, 50);
+        escritorio.add(vh);
+        //escritorio.moveToFront(vh);
+        escritorio.add(vh);
     }//GEN-LAST:event_listadohabitacionesActionPerformed
 
-    private void cancelarreservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarreservaActionPerformed
+    private void VistaHuespedesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VistaHuespedesActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_cancelarreservaActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();
+        VistaHuespedes vh=new VistaHuespedes();
+        vh.setVisible(true);
+        vh.setLocation(200, 50);
+        escritorio.add(vh);
+        //escritorio.moveToFront(vh);
+        escritorio.add(vh);
+    }//GEN-LAST:event_VistaHuespedesActionPerformed
 
     private void modificarreservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarreservaActionPerformed
         // TODO add your handling code here:
+        escritorio.removeAll();
+        escritorio.repaint();
+        modificarreserva vh=new modificarreserva();
+        vh.setVisible(true);
+        vh.setLocation(200, 50);
+        escritorio.add(vh);
+        //escritorio.moveToFront(vh);
+        escritorio.add(vh);
     }//GEN-LAST:event_modificarreservaActionPerformed
 
     private void nuevareservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevareservaActionPerformed
@@ -177,6 +202,18 @@ public class panelprincipal extends javax.swing.JFrame {
         //escritorio.moveToFront(vh);
         escritorio.add(vh);
     }//GEN-LAST:event_nuevareservaActionPerformed
+
+    private void nuevahabitacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevahabitacionActionPerformed
+        // TODO add your handling code here:
+        escritorio.removeAll();
+        escritorio.repaint();
+        nuevahabitacion vh=new nuevahabitacion();
+        vh.setVisible(true);
+        vh.setLocation(200, 50);
+        escritorio.add(vh);
+        //escritorio.moveToFront(vh);
+        escritorio.add(vh);
+    }//GEN-LAST:event_nuevahabitacionActionPerformed
 
     /**
      * @param args the command line arguments
@@ -214,8 +251,7 @@ public class panelprincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenuItem borrarhabitacion;
-    private javax.swing.JMenuItem cancelarreserva;
+    private javax.swing.JMenuItem VistaHuespedes;
     private javax.swing.JMenu contacto;
     private javax.swing.JDesktopPane escritorio;
     private javax.swing.JMenu habitacion;
@@ -224,11 +260,11 @@ public class panelprincipal extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem listadohabitaciones;
-    private javax.swing.JMenuItem listadohuesped;
     private javax.swing.JMenuItem modificarhabitacion;
     private javax.swing.JMenuItem modificarreserva;
     private javax.swing.JMenuItem nuevahabitacion;
     private javax.swing.JMenuItem nuevareserva;
+    private javax.swing.JMenuItem quitarhabitacion;
     private javax.swing.JMenu reserva;
     // End of variables declaration//GEN-END:variables
 }
