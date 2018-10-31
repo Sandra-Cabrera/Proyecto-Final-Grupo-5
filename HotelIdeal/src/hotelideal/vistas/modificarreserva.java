@@ -8,7 +8,11 @@ package hotelideal.vistas;
 import hotelideal.Conexion;
 import hotelideal.Reserva;
 import hotelideal.ReservaData;
+import hotelideal.Huesped;
+import hotelideal.HuespedData;
+import hotelideal.TipoDeHabitacion;
 import java.beans.PropertyVetoException;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -24,7 +28,7 @@ public class modificarreserva extends javax.swing.JInternalFrame {
     Conexion conexion;
     ArrayList<Reserva> listaReservas;
     DefaultTableModel modelo;
-    private Object huespedData;
+    
     /**
      * Creates new form modificarreserva
      */
@@ -211,7 +215,7 @@ public class modificarreserva extends javax.swing.JInternalFrame {
                                             .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(txtDni, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(txtCelular, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 83, Short.MAX_VALUE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(cbxInactiva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(jLabel9)
@@ -219,7 +223,7 @@ public class modificarreserva extends javax.swing.JInternalFrame {
                                     .addComponent(txtNombre)
                                     .addComponent(txtDomicilio, javax.swing.GroupLayout.Alignment.TRAILING)))
                             .addComponent(jLabel1))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                        .addGap(18, 18, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(jLFechaSalida)
@@ -232,7 +236,7 @@ public class modificarreserva extends javax.swing.JInternalFrame {
                                 .addComponent(textImporteTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(jLFechaEntrada)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 141, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 133, Short.MAX_VALUE)
                                 .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
@@ -326,9 +330,9 @@ public class modificarreserva extends javax.swing.JInternalFrame {
         columnas.add("Tipo Habitacion");
         columnas.add("Estado");
         
-        columnas.forEach((it) -> {
+        for (Object it:columnas){
             modelo.addColumn(it);
-        });
+        }
         tblReservas.setModel(modelo);
         }
         
@@ -341,9 +345,9 @@ public class modificarreserva extends javax.swing.JInternalFrame {
 
         public void cargaDatos(){
             borraFilasTabla();
-            listaReservas.forEach((m) -> {
-                modelo.addRow(new Object[]{m.getIngreso(),m.getEgreso(),m.getImporte_total()});
-        });
+            for (Reserva m:listaReservas){
+                modelo.addRow(new Object[]{m.getNumero(),m.getTipoDeHabitacion(),m.getEstado()});
+            }
         }
     private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
         // TODO add your handling code here:
@@ -387,9 +391,6 @@ public class modificarreserva extends javax.swing.JInternalFrame {
     private javax.swing.JButton cancelar;
     private java.awt.Checkbox cbxActiva;
     private java.awt.Checkbox cbxInactiva;
-    private javax.swing.JButton jBSalir;
-    private javax.swing.JButton jBSalir1;
-    private javax.swing.JButton jBSalir2;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private com.toedter.calendar.JDateChooser jDateChooser2;
     private javax.swing.JLabel jLCelular;
