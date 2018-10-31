@@ -17,26 +17,26 @@ public class Reserva {
     private Date egreso;
     private Double importe_total;
     private Boolean estado;
-    private Huesped huesped;
-    private Habitacion habitacion;
+    private int id_habitacion;
+    private int id_huesped;
 
-    public Reserva(int id_reserva, Date ingreso, Date egreso, Double importe_total, Boolean estado, Huesped huesped, Habitacion habitacion) {
+    public Reserva(int id_reserva, Date ingreso, Date egreso, Double importe_total, Boolean estado, int id_huesped, int id_habitacion) {
         this.id_reserva = id_reserva;
         this.ingreso = ingreso;
         this.egreso = egreso;
         this.importe_total = importe_total;
         this.estado = estado;
-        this.huesped = huesped;
-        this.habitacion = habitacion;
+        this.id_huesped = id_huesped;
+        this.id_habitacion = id_habitacion;
     }
         
-    public Reserva(Date ingreso, Date egreso, Double importe_total, Boolean estado, Huesped huesped, Habitacion habitacion) {
+    public Reserva(Date ingreso, Date egreso, Double importe_total, Boolean estado, int id_huesped, int id_habitacion) {
         this.ingreso = ingreso;
         this.egreso = egreso;
         this.importe_total = importe_total;
         this.estado = estado;
-        this.huesped = huesped;
-        this.habitacion = habitacion;
+        this.id_huesped = id_huesped;
+        this.id_habitacion = id_habitacion;
     }
 
     public Reserva() {
@@ -83,20 +83,28 @@ public class Reserva {
         this.estado = estado;
     }
 
-    public Huesped getHuesped() {
-        return huesped;
+    public int getId_uesped() {
+        return id_huesped;
     }
 
-    public void setHuesped(Huesped huesped) {
-        this.huesped = huesped;
+    public void setId_huesped(int id_huesped) {
+        this.id_huesped = id_huesped;
     }
 
-    public Habitacion getHabitacion() {
-        return habitacion;
+    public int getId_Habitacion() {
+        return id_habitacion;
     }
 
-    public void setHabitacion(Habitacion habitacion) {
-        this.habitacion = habitacion;
+    public void setId_habitacion(int id_habitacion) {
+        this.id_habitacion = id_habitacion;
+    }
+
+    public Object getNumero() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public Object getTipoDeHabitacion() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }
