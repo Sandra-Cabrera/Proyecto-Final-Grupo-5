@@ -5,6 +5,8 @@
  */
 package hotelideal.vistas;
 
+import javax.swing.JFrame;
+
 /**
  *
  * @author Maqui's
@@ -16,6 +18,8 @@ public class panelprincipal extends javax.swing.JFrame {
      */
     public panelprincipal() {
         initComponents();
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        
     }
 
     /**
@@ -166,10 +170,12 @@ public class panelprincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
         escritorio.removeAll();
         escritorio.repaint();
-        nuevareserva vm=new nuevareserva();
-        vm.setVisible(true);
-        escritorio.add(vm);
-        escritorio.moveToFront(vm);
+        nuevareserva vh=new nuevareserva();
+        vh.setVisible(true);
+        vh.setLocation(200, 50);
+        escritorio.add(vh);
+        //escritorio.moveToFront(vh);
+        escritorio.add(vh);
     }//GEN-LAST:event_nuevareservaActionPerformed
 
     /**

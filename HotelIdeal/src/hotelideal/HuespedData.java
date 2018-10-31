@@ -117,6 +117,25 @@ public class HuespedData {
     }
     
     
+    public void borrarHuespedPorDni(int dni){
+    
+        try {  
+        
+                String sql = "DELETE FROM huesped WHERE dni = ?;";
+           
+                PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+                statement.setInt(1, dni);
+           
+                statement.executeUpdate();
+           
+                statement.close();   
+           
+        } catch (SQLException ex) {
+            System.out.println("Error al borrar un huésped: " + ex.getMessage());
+        }
+
+    }
+    
     public void actualizarHuesped(Huesped huesped){
          
         try {
@@ -140,6 +159,7 @@ public class HuespedData {
         }
         
     }
+    
     
     
     public Huesped buscarHuesped(int id_huesped){
@@ -173,5 +193,36 @@ public class HuespedData {
         
         return huesped;
     }
-     
+   
+    public Huesped buscarHuespedPorDni(int dni){
+    Huesped huesped =null;
+    try {
+            
+            String sql = "SELECT * FROM huesped WHERE dni =?;";
+
+            PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            statement.setInt(1, dni);
+           
+            
+            ResultSet resultSet=statement.executeQuery();
+            
+            while(resultSet.next()){
+                huesped = new Huesped();
+                huesped.setId_huesped(resultSet.getInt("id_huesped"));
+                huesped.setNombre(resultSet.getString("nombre"));
+                huesped.setDni(resultSet.getInt("dni"));
+                huesped.setDomicilio(resultSet.getString("domicilio"));
+                huesped.setCorreo(resultSet.getString("correo"));
+                huesped.setCelular(resultSet.getInt("celular"));
+
+                
+            }      
+            statement.close();
+            
+        } catch (SQLException ex) {
+            System.out.println("Error al buscar un huesped por el DNI: " + ex.getMessage());
+        }
+        
+        return huesped;
+    }
 }
