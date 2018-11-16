@@ -11,13 +11,15 @@ import hotelideal.HuespedData;
 import java.beans.PropertyVetoException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author Sandra
  */
 public class VistaHuespedes extends javax.swing.JInternalFrame {
-    private int id_huesped, dni, celular;
+    private int id_huesped, dni;
+    private long celular;
     private String nombre, domicilio, correo;
     private HuespedData huespedData;
     private Conexion conexion;
@@ -205,12 +207,12 @@ public class VistaHuespedes extends javax.swing.JInternalFrame {
 
     private void jBBorrarHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBorrarHActionPerformed
         // TODO add your handling code here:
-        int dni = Integer.parseInt(jTDni.getText());
-        huespedData.borrarHuespedPorDni(dni);   
         
-        // Bloqueo de Actualizar y Borrar
-        jBActualizar.setEnabled(false);
-        jBBorrarH.setEnabled(false);
+        int dni = Integer.parseInt(jTDni.getText());
+        huespedData.borrarHuespedPorDni(dni);
+        JOptionPane.showMessageDialog(null, "Eliminación exitosa");
+        jTNom.setText(""); jTDni.setText(""); jTDom.setText("");
+        jTCorr.setText(""); jTCel.setText("");
         
     }//GEN-LAST:event_jBBorrarHActionPerformed
 
@@ -220,11 +222,15 @@ public class VistaHuespedes extends javax.swing.JInternalFrame {
         dni=Integer.parseInt(jTDni.getText());
         domicilio =jTDom.getText();
         correo=jTCorr.getText();
-        celular= Integer.parseInt(jTCel.getText());
+        celular= Long.parseLong(jTCel.getText());
         
         Huesped huesped = new Huesped(nombre ,dni ,domicilio ,correo ,celular );
         huespedData.guardarHuesped(huesped);
+        JOptionPane.showMessageDialog(null, "¡¡Huésped ingresado!!");
         
+        /* Limpiar campos de texto*/
+        jTNom.setText(""); jTDni.setText(""); jTDom.setText("");
+        jTCorr.setText(""); jTCel.setText("");
         
     }//GEN-LAST:event_jBAgregarHActionPerformed
 
@@ -248,7 +254,7 @@ public class VistaHuespedes extends javax.swing.JInternalFrame {
         dni = Integer.parseInt(jTDni.getText());
         domicilio = jTDom.getText();
         correo = jTCorr.getText();
-        celular= Integer.parseInt(jTCel.getText());
+        celular= Long.parseLong(jTCel.getText());
         
         Huesped huesped=new Huesped(id_huesped ,nombre ,dni ,domicilio ,correo ,celular );
         huespedData.actualizarHuesped(huesped);
