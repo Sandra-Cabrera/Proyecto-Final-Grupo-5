@@ -15,12 +15,12 @@ public class Reserva {
     private int id_reserva;
     private Date ingreso;
     private Date egreso;
-    private Double importe_total;
-    private Boolean estado;
+    private double importe_total;
+    private boolean estado;
     private int id_habitacion;
     private int id_huesped;
 
-    public Reserva(int id_reserva, Date ingreso, Date egreso, Double importe_total, Boolean estado, int id_huesped, int id_habitacion) {
+    public Reserva(int id_reserva, Date ingreso, Date egreso, double importe_total, boolean estado, int id_huesped, int id_habitacion) {
         this.id_reserva = id_reserva;
         this.ingreso = ingreso;
         this.egreso = egreso;
@@ -30,7 +30,7 @@ public class Reserva {
         this.id_habitacion = id_habitacion;
     }
         
-    public Reserva(Date ingreso, Date egreso, Double importe_total, Boolean estado, int id_huesped, int id_habitacion) {
+    public Reserva(Date ingreso, Date egreso, double importe_total, boolean estado, int id_huesped, int id_habitacion) {
         this.ingreso = ingreso;
         this.egreso = egreso;
         this.importe_total = importe_total;
@@ -67,19 +67,19 @@ public class Reserva {
         this.egreso = egreso;
     }
 
-    public Double getImporte_total() {
+    public double getImporte_total() {
         return importe_total;
     }
 
-    public void setImporte_total(Double importe_total) {
+    public void setImporte_total(double importe_total) {
         this.importe_total = importe_total;
     }
 
-    public Boolean getEstado() {
+    public boolean getEstado() {
         return estado;
     }
 
-    public void setEstado(Boolean estado) {
+    public void setEstado(boolean estado) {
         this.estado = estado;
     }
 

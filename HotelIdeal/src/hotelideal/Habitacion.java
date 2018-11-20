@@ -7,16 +7,16 @@ package hotelideal;
 
 /**
  *
- * @author Maqui's
+ * @author Grupo5
  */
 public class Habitacion {
     private int id_habitacion;
     private int numero;
     private int piso;
-    private Boolean estado;
+    private boolean estado;
     private int id_tipo_de_habitacion;
 
-    public Habitacion(int id_habitacion, int numero, int piso, Boolean estado, int id_tipo_de_habitacion) {
+    public Habitacion(int id_habitacion, int numero, int piso, boolean estado, int id_tipo_de_habitacion) {
         this.id_habitacion = id_habitacion;
         this.numero = numero;
         this.piso = piso;
@@ -24,7 +24,7 @@ public class Habitacion {
         this.id_tipo_de_habitacion = id_tipo_de_habitacion;
     }
 
-    public Habitacion(int numero, int piso, Boolean estado, int id_tipo_de_habitacion ) {
+    public Habitacion(int numero, int piso, boolean estado, int id_tipo_de_habitacion ) {
         this.numero = numero;
         this.piso = piso;
         this.estado = estado;
@@ -59,11 +59,11 @@ public class Habitacion {
         this.piso = piso;
     }
 
-    public Boolean getEstado() {
+    public boolean getEstado() {
         return estado;
     }
 
-    public void setEstado(Boolean estado) {
+    public void setEstado(boolean estado) {
         this.estado = estado;
     }
     

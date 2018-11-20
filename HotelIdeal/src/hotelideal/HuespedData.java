@@ -44,7 +44,7 @@ public class HuespedData {
             statement.setInt(2, huesped.getDni());
             statement.setString(3, huesped.getDomicilio());
             statement.setString(4, huesped.getCorreo());
-            statement.setInt(5, huesped.getCelular());
+            statement.setLong(5, huesped.getCelular());
             
             statement.executeUpdate();
             
@@ -81,7 +81,7 @@ public class HuespedData {
                 huesped.setDni(resultSet.getInt("dni"));
                 huesped.setDomicilio(resultSet.getString("domicilio"));
                 huesped.setCorreo(resultSet.getString("correo"));
-                huesped.setCelular(resultSet.getInt("celular"));
+                huesped.setCelular(resultSet.getLong("celular"));
     
                 huespedes.add(huesped);
             }      
@@ -148,7 +148,7 @@ public class HuespedData {
                 statement.setInt(2, huesped.getDni());
                 statement.setString(3, huesped.getDomicilio());
                 statement.setString(4, huesped.getCorreo());
-                statement.setInt(5, huesped.getCelular());
+                statement.setLong(5, huesped.getCelular());
                 statement.setInt(6, huesped.getId_huesped());
                 statement.executeUpdate();
           
@@ -181,7 +181,7 @@ public class HuespedData {
                 huesped.setDni(resultSet.getInt("dni"));
                 huesped.setDomicilio(resultSet.getString("domicilio"));
                 huesped.setCorreo(resultSet.getString("correo"));
-                huesped.setCelular(resultSet.getInt("celular"));
+                huesped.setCelular(resultSet.getLong("celular"));
 
                 
             }      
@@ -213,7 +213,7 @@ public class HuespedData {
                 huesped.setDni(resultSet.getInt("dni"));
                 huesped.setDomicilio(resultSet.getString("domicilio"));
                 huesped.setCorreo(resultSet.getString("correo"));
-                huesped.setCelular(resultSet.getInt("celular"));
+                huesped.setCelular(resultSet.getLong("celular"));
 
                 
             }      
