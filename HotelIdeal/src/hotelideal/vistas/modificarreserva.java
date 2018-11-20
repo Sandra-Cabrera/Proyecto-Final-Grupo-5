@@ -39,9 +39,7 @@ public class modificarreserva extends javax.swing.JInternalFrame {
             conexion=new Conexion("jdbc:mysql://localhost/hotelidealgrupo5","root","");
             reservaData=new ReservaData(conexion);
             modelo=new DefaultTableModel();
-            //listaReservas=(ArrayList)reservaData.obtenerReserva();
-            armaCabezeraTabla();
-            cargaDatos();
+            
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(VistaHuespedes.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -323,32 +321,7 @@ public class modificarreserva extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    public void armaCabezeraTabla(){
-        ArrayList<Object> columnas=new ArrayList<>();
-        
-        columnas.add("Numero Habitacion");
-        columnas.add("Tipo Habitacion");
-        columnas.add("Estado");
-        
-        for (Object it:columnas){
-            modelo.addColumn(it);
-        }
-        tblReservas.setModel(modelo);
-        }
-        
-        public void borraFilasTabla(){
-            int a =modelo.getRowCount()-1;
-            for(int i=a;i>=0;i--){
-                modelo.removeRow(i);
-            }
-        }
-
-        public void cargaDatos(){
-            borraFilasTabla();
-            for (Reserva m:listaReservas){
-                modelo.addRow(new Object[]{m.getNumero(),m.getTipoDeHabitacion(),m.getEstado()});
-            }
-        }
+   
     private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNombreActionPerformed

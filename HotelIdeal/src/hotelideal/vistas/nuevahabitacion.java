@@ -26,7 +26,7 @@ public class nuevahabitacion extends javax.swing.JInternalFrame {
         initComponents();
     
        try {
-            conexion=new Conexion("jdbc:mysql://localhost/hotelideal1","root","");
+            conexion=new Conexion("jdbc:mysql://localhost/hotelidealgrupo5","root","");
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(nuevahabitacion.class.getName()).log(Level.SEVERE, null, ex);
         }
