@@ -14,21 +14,21 @@ public class Habitacion {
     private int numero;
     private int piso;
     private boolean estado;
-    private int id_tipo_de_habitacion;
+    private TipoDeHabitacion tipo_de_habitacion;
 
-    public Habitacion(int id_habitacion, int numero, int piso, boolean estado, int id_tipo_de_habitacion) {
+    public Habitacion(int id_habitacion, int numero, int piso, boolean estado, TipoDeHabitacion tipo_de_habitacion) {
         this.id_habitacion = id_habitacion;
         this.numero = numero;
         this.piso = piso;
         this.estado = estado;
-        this.id_tipo_de_habitacion = id_tipo_de_habitacion;
+        this.tipo_de_habitacion = tipo_de_habitacion;
     }
 
-    public Habitacion(int numero, int piso, boolean estado, int id_tipo_de_habitacion ) {
+    public Habitacion(int numero, int piso, boolean estado, TipoDeHabitacion tipo_de_habitacion ) {
         this.numero = numero;
         this.piso = piso;
         this.estado = estado;
-        this.id_tipo_de_habitacion = id_tipo_de_habitacion;
+        this.tipo_de_habitacion = tipo_de_habitacion;
     }
 
      public Habitacion() {
@@ -67,12 +67,12 @@ public class Habitacion {
         this.estado = estado;
     }
     
-    public int getId_tipo_de_habitacion() {
-        return id_tipo_de_habitacion;
+    public TipoDeHabitacion getTipo_de_habitacion() {
+        return tipo_de_habitacion;
     }
     
-    public void setId_tipo_de_habitacion(int id_tipo_de_habitacion) {
-        this.id_tipo_de_habitacion = id_tipo_de_habitacion;
+    public void setTipo_de_habitacion(TipoDeHabitacion tipo_de_habitacion) {
+        this.tipo_de_habitacion = tipo_de_habitacion;
     }
     
     

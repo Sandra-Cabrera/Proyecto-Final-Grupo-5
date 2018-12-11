@@ -15,9 +15,9 @@ public class Huesped {
     private int dni;
     private String domicilio;
     private String correo;
-    private long celular;
+    private String celular;
 
-    public Huesped(int id_huesped, String nombre, int dni, String domicilio, String correo, long celular) {
+    public Huesped(int id_huesped, String nombre, int dni, String domicilio, String correo, String celular) {
         this.id_huesped = id_huesped;
         this.nombre = nombre;
         this.dni = dni;
@@ -26,7 +26,7 @@ public class Huesped {
         this.celular = celular;
     }
 
-    public Huesped(String nombre, int dni, String domicilio, String correo, long celular) {
+    public Huesped(String nombre, int dni, String domicilio, String correo, String celular) {
         id_huesped=-1;
         this.nombre = nombre;
         this.dni = dni;
@@ -79,11 +79,11 @@ public class Huesped {
         this.correo = correo;
     }
 
-    public long getCelular() {
+    public String getCelular() {
         return celular;
     }
 
-    public void setCelular(long celular) {
+    public void setCelular(String celular) {
         this.celular = celular;
     }
     

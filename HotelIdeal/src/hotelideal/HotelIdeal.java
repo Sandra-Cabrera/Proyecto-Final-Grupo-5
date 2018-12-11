@@ -20,7 +20,7 @@ public class HotelIdeal {
         }
      
         huespedData = new HuespedData(conexion);
-        Huesped huesped = new Huesped("Pablo Alvarez",36777888,"Rivadavia 550","pabloa@ulp.edu.ar",266498766);
+        Huesped huesped = new Huesped("Pablo Alvarez",36777888,"Rivadavia 550","pabloa@ulp.edu.ar","266498766");
         huespedData.guardarHuesped(huesped);
         
          

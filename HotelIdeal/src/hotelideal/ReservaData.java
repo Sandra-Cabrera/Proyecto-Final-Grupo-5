@@ -1,4 +1,4 @@
-/*
+/*j
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -20,26 +20,31 @@ import java.util.List;
  * @author Sandra
  */
 public class ReservaData {
-     private Connection connection = null;
-//conexion de la clase con su excepcion 
+    private Connection connection = null;
+    private Conexion conexion;
+     
+    //conexion de la clase con su excepcion 
     public ReservaData(Conexion conexion) {
         try {
             connection = conexion.getConexion();
+            this.conexion = conexion;
         } catch (SQLException ex) {
             System.out.println("Error al abrir al obtener la conexion");
         }
     }
     
-    //metodo guardar un huesped con todos sus campos
+    //metodo guardar una reserva con todos sus campos
     public void crearReserva(Reserva reserva){
         try {
-            String sql = "INSERT INTO reserva ( ingreso , egreso , importe_total , estado ) VALUES ( ? , ? , ? , ? );";
+            String sql = "INSERT INTO reserva ( ingreso , egreso , importe_total , id_huesped , id_habitacion )  VALUES ( ? , ? , ? , ? , ? , ? );";
 
             PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             statement.setDate(1, reserva.getIngreso());
             statement.setDate(2, reserva.getEgreso());
             statement.setDouble(3, reserva.getImporte_total());
             statement.setBoolean(4, reserva.getEstado());
+            statement.setInt(5, reserva.getHuesped().getId_huesped());
+            statement.setInt(6, reserva.getHabitacion().getId_habitacion());
             
             statement.executeUpdate();
             
@@ -59,7 +64,7 @@ public class ReservaData {
     
     
     
-    public List<Reserva> obtenerReserva(){
+    public List<Reserva> obtenerReservas(){
        List<Reserva> reservas = new ArrayList<Reserva>();
             
 
@@ -76,6 +81,12 @@ public class ReservaData {
                 reserva.setEgreso(resultSet.getDate("egreso"));
                 reserva.setImporte_total(resultSet.getDouble("importe_total"));
                 reserva.setEstado(resultSet.getBoolean("estado"));
+                 
+                Huesped h = this.buscarHuesped(resultSet.getInt("id_huesped"));
+                reserva.setHuesped(h);
+                
+                Habitacion hab = this.buscarHabitacion(resultSet.getInt("id_habitacion"));
+                reserva.setHabitacion(hab);
     
                 reservas.add(reserva);
             }      
@@ -83,8 +94,7 @@ public class ReservaData {
         } catch (SQLException ex) {
             System.out.println("Error al obtener las reservas: " + ex.getMessage());
         }
-        
-        
+                
         return reservas;
     }
     
@@ -123,6 +133,10 @@ public class ReservaData {
                 statement.setDate(2, reserva.getEgreso());
                 statement.setDouble(3, reserva.getImporte_total());
                 statement.setBoolean(4, reserva.getEstado());
+                statement.setInt(5, reserva.getHuesped().getId_huesped());
+                statement.setInt(6, reserva.getHabitacion().getId_habitacion());
+                statement.setInt(7, reserva.getId_reserva());
+                
                 statement.executeUpdate();
           
                 statement.close();
@@ -135,8 +149,9 @@ public class ReservaData {
     
     
     public Reserva buscarReserva(int id_reserva){
-    Reserva reserva =null;
-    try {
+        Reserva reserva = null;
+        
+        try {
             
             String sql = "SELECT * FROM reserva WHERE id_reserva =?;";
 
@@ -153,6 +168,12 @@ public class ReservaData {
                 reserva.setEgreso(resultSet.getDate("egreso"));
                 reserva.setImporte_total(resultSet.getDouble("importe_total"));
                 
+                Huesped h = this.buscarHuesped(resultSet.getInt("id_huesped"));
+                reserva.setHuesped(h);
+                
+                Habitacion hab = this.buscarHabitacion(resultSet.getInt("id_habitacion"));
+                reserva.setHabitacion(hab);
+                                          
             }      
             statement.close();
             
@@ -165,8 +186,9 @@ public class ReservaData {
     
     
     public Reserva buscarReservaPorHuesped(String nombre){
-    Reserva reserva =null;
-    try {
+        Reserva reserva = null;
+    
+        try {
             
             String sql = "SELECT * FROM reserva WHERE reserva.id_huesped = huesped.id_huesped AND huesped.nombre LIKE nombre ;";
 
@@ -183,6 +205,11 @@ public class ReservaData {
                 reserva.setEgreso(resultSet.getDate("egreso"));
                 reserva.setImporte_total(resultSet.getDouble("importe_total"));
                 
+                Huesped h = this.buscarHuesped(resultSet.getInt("id_huesped"));
+                reserva.setHuesped(h);
+                
+                Habitacion hab = this.buscarHabitacion(resultSet.getInt("id_habitacion"));
+                reserva.setHabitacion(hab);
             }      
             statement.close();
             
@@ -194,10 +221,10 @@ public class ReservaData {
     }
     
     public Reserva buscarReservaPorDni(int dni){
-    Reserva reserva =null;
-    try {
+        Reserva reserva =null;
+        try {
             
-            String sql = "SELECT * FROM reserva WHERE reserva.id_huesped = huesped.id_huesped AND huesped.dni = dni ;";
+            String sql = "SELECT * FROM reserva, huesped WHERE reserva.id_huesped = huesped.id_huesped AND huesped.dni = dni ;";
 
             PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             statement.setInt(1, dni);
@@ -211,6 +238,12 @@ public class ReservaData {
                 reserva.setIngreso(resultSet.getDate("ingreso")); 
                 reserva.setEgreso(resultSet.getDate("egreso"));
                 reserva.setImporte_total(resultSet.getDouble("importe_total"));
+                
+                Huesped h = this.buscarHuesped(resultSet.getInt("id_huesped"));
+                reserva.setHuesped(h);
+                
+                Habitacion hab = this.buscarHabitacion(resultSet.getInt("id_habitacion"));
+                reserva.setHabitacion(hab);
                 
             }      
             statement.close();
@@ -230,5 +263,21 @@ public class ReservaData {
         
         int cant_dias=(int)  ((egreso.getTime()-ingreso.getTime())/86400000);
         return cant_dias;
+    }
+    
+    public Huesped buscarHuesped(int idhuesped){
+         
+        HuespedData huespeddata = new HuespedData(conexion);
+        Huesped h = huespeddata.buscarHuesped(idhuesped);
+                
+        return h;
+    }
+    
+    public Habitacion buscarHabitacion(int idhabitacion){
+         
+        HabitacionData habitaciondata = new HabitacionData(conexion);
+        Habitacion hab = habitaciondata.buscarHabitacion(idhabitacion);
+                
+        return hab;
     }
 }

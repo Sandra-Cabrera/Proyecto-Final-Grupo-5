@@ -19,16 +19,20 @@ import java.util.List;
  */
 public class TipoDeHabitacionData {
     private Connection connection = null;
-//conexion de la clase con su excepcion 
+    private Conexion conexion;
+    
+    //conexion de la clase con su excepcion 
     public TipoDeHabitacionData(Conexion conexion) {
         try {
             connection = conexion.getConexion();
+            this.conexion = conexion;
+            
         } catch (SQLException ex) {
             System.out.println("Error al abrir al obtener la conexion");
         }
     }
     
-    //metodo guardar un huesped con todos sus campos
+    //metodo guardar un tipo de habitacion con todos sus campos
     public void guardarTipoDeHabitaion(TipoDeHabitacion tipoDeHabitacion){
         try {
             String sql = "INSERT INTO tipoDeHabitacion ( tipo , max_personas , cant_camas , tipo_camas , precio_noche ) VALUES ( ? , ? , ? , ? , ? );";
@@ -84,7 +88,6 @@ public class TipoDeHabitacionData {
             System.out.println("Error al obtener un Tipo De Habitacion: " + ex.getMessage());
         }
         
-        
         return tipoDeHabitaciones;
     }
     
@@ -138,8 +141,8 @@ public class TipoDeHabitacionData {
   
     
     public TipoDeHabitacion buscarTipoDeHabitacion(int id_tipo_de_habitacion){
-    TipoDeHabitacion tipoDeHabitacion =null;
-    try {
+        TipoDeHabitacion tipoDeHabitacion = null;
+        try {
             
             String sql = "SELECT * FROM tipoDeHabitacion WHERE id_tipo_de_habitacion = ? ;";
 
@@ -147,7 +150,7 @@ public class TipoDeHabitacionData {
             statement.setInt(1, id_tipo_de_habitacion);
            
             
-            ResultSet resultSet=statement.executeQuery();
+            ResultSet resultSet = statement.executeQuery();
             
             while(resultSet.next()){
                 tipoDeHabitacion = new TipoDeHabitacion();

@@ -17,26 +17,26 @@ public class Reserva {
     private Date egreso;
     private double importe_total;
     private boolean estado;
-    private int id_habitacion;
-    private int id_huesped;
+    private Huesped huesped;
+    private Habitacion habitacion;
 
-    public Reserva(int id_reserva, Date ingreso, Date egreso, double importe_total, boolean estado, int id_huesped, int id_habitacion) {
+    public Reserva(int id_reserva, Date ingreso, Date egreso, double importe_total, boolean estado, Huesped huesped, Habitacion habitacion) {
         this.id_reserva = id_reserva;
         this.ingreso = ingreso;
         this.egreso = egreso;
         this.importe_total = importe_total;
         this.estado = estado;
-        this.id_huesped = id_huesped;
-        this.id_habitacion = id_habitacion;
+        this.huesped = huesped;
+        this.habitacion = habitacion;
     }
         
-    public Reserva(Date ingreso, Date egreso, double importe_total, boolean estado, int id_huesped, int id_habitacion) {
+    public Reserva(Date ingreso, Date egreso, double importe_total, boolean estado, Huesped huesped, Habitacion habitacion) {
         this.ingreso = ingreso;
         this.egreso = egreso;
         this.importe_total = importe_total;
         this.estado = estado;
-        this.id_huesped = id_huesped;
-        this.id_habitacion = id_habitacion;
+        this.huesped = huesped;
+        this.habitacion = habitacion;
     }
 
     public Reserva() {
@@ -83,20 +83,20 @@ public class Reserva {
         this.estado = estado;
     }
 
-    public int getId_uesped() {
-        return id_huesped;
+    public Huesped getHuesped() {
+        return huesped;
     }
 
-    public void setId_huesped(int id_huesped) {
-        this.id_huesped = id_huesped;
+    public void setHuesped(Huesped huesped) {
+        this.huesped = huesped;
     }
 
-    public int getId_Habitacion() {
-        return id_habitacion;
+    public Habitacion getHabitacion() {
+        return habitacion;
     }
 
-    public void setId_habitacion(int id_habitacion) {
-        this.id_habitacion = id_habitacion;
+    public void setHabitacion(Habitacion habitacion) {
+        this.habitacion = habitacion;
     }
 
     public Object getNumero() {

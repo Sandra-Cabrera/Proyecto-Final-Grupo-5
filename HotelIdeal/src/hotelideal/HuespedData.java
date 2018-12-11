@@ -1,5 +1,4 @@
-
-/*
+ /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -25,13 +24,18 @@ import java.util.logging.Logger;
 public class HuespedData {
     
     private Connection connection = null;
-//conexion de la clase con su excepcion 
+    private Conexion conexion;
+    
+    //conexion de la clase con su excepcion 
     public HuespedData(Conexion conexion) {
         try {
             connection = conexion.getConexion();
+            this.conexion = conexion;
+            
         } catch (SQLException ex) {
             System.out.println("Error al abrir al obtener la conexion");
         }
+        
     }
     
     //metodo guardar un huesped con todos sus campos
@@ -44,7 +48,7 @@ public class HuespedData {
             statement.setInt(2, huesped.getDni());
             statement.setString(3, huesped.getDomicilio());
             statement.setString(4, huesped.getCorreo());
-            statement.setLong(5, huesped.getCelular());
+            statement.setString(5, huesped.getCelular());
             
             statement.executeUpdate();
             
@@ -65,14 +69,14 @@ public class HuespedData {
     
     
     public List<Huesped> obtenerHuesped(){
-       List<Huesped> huespedes = new ArrayList<Huesped>();
-            
-
+        List<Huesped> huespedes = new ArrayList<Huesped>();
+           
         try {
             String sql = "SELECT * FROM huesped;";
             
             PreparedStatement statement = connection.prepareStatement(sql);
             ResultSet resultSet = statement.executeQuery();
+            
             Huesped huesped;
             while(resultSet.next()){
                 huesped = new Huesped();
@@ -81,7 +85,7 @@ public class HuespedData {
                 huesped.setDni(resultSet.getInt("dni"));
                 huesped.setDomicilio(resultSet.getString("domicilio"));
                 huesped.setCorreo(resultSet.getString("correo"));
-                huesped.setCelular(resultSet.getLong("celular"));
+                huesped.setCelular(resultSet.getString("celular"));
     
                 huespedes.add(huesped);
             }      
@@ -89,7 +93,6 @@ public class HuespedData {
         } catch (SQLException ex) {
             System.out.println("Error al obtener los huespedes: " + ex.getMessage());
         }
-        
         
         return huespedes;
     }
@@ -121,14 +124,14 @@ public class HuespedData {
     
         try {  
         
-                String sql = "DELETE FROM huesped WHERE dni = ?;";
+            String sql = "DELETE FROM huesped WHERE dni = ?;";
            
-                PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-                statement.setInt(1, dni);
+            PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            statement.setInt(1, dni);
            
-                statement.executeUpdate();
+            statement.executeUpdate();
            
-                statement.close();   
+            statement.close();   
            
         } catch (SQLException ex) {
             System.out.println("Error al borrar un huésped: " + ex.getMessage());
@@ -148,7 +151,7 @@ public class HuespedData {
                 statement.setInt(2, huesped.getDni());
                 statement.setString(3, huesped.getDomicilio());
                 statement.setString(4, huesped.getCorreo());
-                statement.setLong(5, huesped.getCelular());
+                statement.setString(5, huesped.getCelular());
                 statement.setInt(6, huesped.getId_huesped());
                 statement.executeUpdate();
           
@@ -163,15 +166,15 @@ public class HuespedData {
     
     
     public Huesped buscarHuesped(int id_huesped){
-    Huesped huesped =null;
-    try {
+        Huesped huesped = null;
+    
+        try {
             
             String sql = "SELECT * FROM huesped WHERE id_huesped =?;";
 
             PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             statement.setInt(1, id_huesped);
            
-            
             ResultSet resultSet=statement.executeQuery();
             
             while(resultSet.next()){
@@ -181,9 +184,8 @@ public class HuespedData {
                 huesped.setDni(resultSet.getInt("dni"));
                 huesped.setDomicilio(resultSet.getString("domicilio"));
                 huesped.setCorreo(resultSet.getString("correo"));
-                huesped.setCelular(resultSet.getLong("celular"));
-
-                
+                huesped.setCelular(resultSet.getString("celular"));
+    
             }      
             statement.close();
             
@@ -195,16 +197,16 @@ public class HuespedData {
     }
    
     public Huesped buscarHuespedPorDni(int dni){
-    Huesped huesped =null;
-    try {
+        Huesped huesped = null;
+    
+        try {
             
             String sql = "SELECT * FROM huesped WHERE dni =?;";
 
             PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             statement.setInt(1, dni);
            
-            
-            ResultSet resultSet=statement.executeQuery();
+            ResultSet resultSet = statement.executeQuery();
             
             while(resultSet.next()){
                 huesped = new Huesped();
@@ -213,8 +215,7 @@ public class HuespedData {
                 huesped.setDni(resultSet.getInt("dni"));
                 huesped.setDomicilio(resultSet.getString("domicilio"));
                 huesped.setCorreo(resultSet.getString("correo"));
-                huesped.setCelular(resultSet.getLong("celular"));
-
+                huesped.setCelular(resultSet.getString("celular"));
                 
             }      
             statement.close();

@@ -34,7 +34,7 @@ public class TipoDeHabitacion {
         this.precio_noche = precio_noche;
     }
     
-      public TipoDeHabitacion() {
+    public TipoDeHabitacion() {
         id_tipo_de_habitacion=-1;
     }
 

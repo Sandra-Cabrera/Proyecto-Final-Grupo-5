@@ -8,7 +8,11 @@ package hotelideal.vistas;
 import hotelideal.Conexion;
 import hotelideal.Huesped;
 import hotelideal.HuespedData;
+import hotelideal.Reserva;
+import hotelideal.ReservaData;
 import java.beans.PropertyVetoException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -18,11 +22,11 @@ import javax.swing.JOptionPane;
  * @author Sandra
  */
 public class VistaHuespedes extends javax.swing.JInternalFrame {
-    private int id_huesped, dni;
-    private long celular;
-    private String nombre, domicilio, correo;
+    private int id_huesped, dni;    
+    private String nombre, domicilio, correo, celular;
     private HuespedData huespedData;
     private Conexion conexion;
+    private ReservaData reservaData;
     /**
      * Creates new form VistaHuespedes
      */
@@ -32,6 +36,7 @@ public class VistaHuespedes extends javax.swing.JInternalFrame {
         try {
         conexion = new Conexion("jdbc:mysql://localhost/hotelidealgrupo5", "root", "");
         huespedData = new HuespedData(conexion);
+        reservaData = new ReservaData(conexion);
         
         } catch (ClassNotFoundException ex) {
         Logger.getLogger(VistaHuespedes.class.getName()).log(Level.SEVERE, null, ex);
@@ -58,14 +63,20 @@ public class VistaHuespedes extends javax.swing.JInternalFrame {
         jTDom = new javax.swing.JTextField();
         jTCorr = new javax.swing.JTextField();
         jTCel = new javax.swing.JTextField();
-        jBInformeH = new javax.swing.JButton();
+        BuscarXDNI = new javax.swing.JButton();
         jBActualizar = new javax.swing.JButton();
         jBBorrarH = new javax.swing.JButton();
         jBAgregarH = new javax.swing.JButton();
-        jBSalir = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+
+        setClosable(true);
+        setIconifiable(true);
+        setMaximizable(true);
+        setResizable(true);
 
         jLHuespedes.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLHuespedes.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -87,9 +98,19 @@ public class VistaHuespedes extends javax.swing.JInternalFrame {
             }
         });
 
-        jBInformeH.setText("INFORME POR DNI");
+        BuscarXDNI.setText("BUSCAR POR DNI");
+        BuscarXDNI.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BuscarXDNIActionPerformed(evt);
+            }
+        });
 
         jBActualizar.setText("ACTUALIZAR DATOS");
+        jBActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBActualizarActionPerformed(evt);
+            }
+        });
 
         jBBorrarH.setText("BORRAR HUESPED");
         jBBorrarH.addActionListener(new java.awt.event.ActionListener() {
@@ -105,14 +126,16 @@ public class VistaHuespedes extends javax.swing.JInternalFrame {
             }
         });
 
-        jBSalir.setText("SALIR");
-        jBSalir.addActionListener(new java.awt.event.ActionListener() {
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/ImagenHuespedes_1.jpg"))); // NOI18N
+
+        jButton1.setText("LIMPIAR");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBSalirActionPerformed(evt);
+                jButton1ActionPerformed(evt);
             }
         });
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/ImagenHuespedes_1.jpg"))); // NOI18N
+        jLabel4.setText("Complete los campos\\n para agregar un nuevo huesped.");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -124,54 +147,63 @@ public class VistaHuespedes extends javax.swing.JInternalFrame {
                         .addGap(310, 310, 310)
                         .addComponent(jLHuespedes, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(37, 37, 37)
+                        .addGap(20, 20, 20)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jBInformeH, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
                                 .addComponent(jBAgregarH, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jBBorrarH, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
+                                .addGap(35, 35, 35)
                                 .addComponent(jBActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jBSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(65, 65, 65)
+                                .addComponent(jBBorrarH, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(42, 42, 42)
+                                .addComponent(jButton1))
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(jLNombre, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLDni, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLDomicilio, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLCorreo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLCelular, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(6, 6, 6)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jTNom)
-                                    .addComponent(jTDni)
-                                    .addComponent(jTDom)
-                                    .addComponent(jTCorr)
-                                    .addComponent(jTCel, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(32, 32, 32)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(BuscarXDNI, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                            .addComponent(jLNombre, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(jLDni, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(jLDomicilio, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(jLCorreo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(jLCelular, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(6, 6, 6)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(jTNom)
+                                            .addComponent(jTDni)
+                                            .addComponent(jTDom)
+                                            .addComponent(jTCorr)
+                                            .addComponent(jTCel, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(jLabel4))
+                                .addGap(49, 49, 49)
                                 .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel1)
                                     .addComponent(jLabel2))))))
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jBActualizar, jBAgregarH, jBBorrarH, jBInformeH, jBSalir});
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {BuscarXDNI, jBActualizar, jBAgregarH, jBBorrarH});
 
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jLHuespedes, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(7, 7, 7)
+                        .addComponent(BuscarXDNI)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jTNom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -190,15 +222,13 @@ public class VistaHuespedes extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLCelular, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTCel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jLabel3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
+                            .addComponent(jTCel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jBInformeH)
                     .addComponent(jBActualizar)
-                    .addComponent(jBBorrarH)
                     .addComponent(jBAgregarH)
-                    .addComponent(jBSalir))
+                    .addComponent(jButton1)
+                    .addComponent(jBBorrarH))
                 .addContainerGap())
         );
 
@@ -208,11 +238,28 @@ public class VistaHuespedes extends javax.swing.JInternalFrame {
     private void jBBorrarHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBorrarHActionPerformed
         // TODO add your handling code here:
         
-        int dni = Integer.parseInt(jTDni.getText());
-        huespedData.borrarHuespedPorDni(dni);
-        JOptionPane.showMessageDialog(null, "Eliminación exitosa");
-        jTNom.setText(""); jTDni.setText(""); jTDom.setText("");
-        jTCorr.setText(""); jTCel.setText("");
+        int dni = Integer.parseInt(JOptionPane.showInputDialog("Ingrese DNI del Huésped"));
+        int id_reserva = -1;
+        ArrayList<Reserva> listaDeReservas = (ArrayList)reservaData.obtenerReservas();
+        
+        for(Reserva r:listaDeReservas){
+            if (r.getHuesped().getDni()==dni){
+                id_reserva=r.getId_reserva();
+            //nuevalista.add(r);
+            }
+        }
+        
+        if (id_reserva>-1){
+            JOptionPane.showMessageDialog(null, "No se puede borrar porque tiene una reserva cargada en la base de datos");
+  
+        }else{
+            huespedData.borrarHuespedPorDni(dni);
+            JOptionPane.showMessageDialog(null, "Eliminación exitosa");
+            jTNom.setText(""); jTDni.setText(""); jTDom.setText("");
+            jTCorr.setText(""); jTCel.setText("");
+            
+        }
+        
         
     }//GEN-LAST:event_jBBorrarHActionPerformed
 
@@ -222,15 +269,12 @@ public class VistaHuespedes extends javax.swing.JInternalFrame {
         dni=Integer.parseInt(jTDni.getText());
         domicilio =jTDom.getText();
         correo=jTCorr.getText();
-        celular= Long.parseLong(jTCel.getText());
+        celular= jTCel.getText();
         
         Huesped huesped = new Huesped(nombre ,dni ,domicilio ,correo ,celular );
         huespedData.guardarHuesped(huesped);
         JOptionPane.showMessageDialog(null, "¡¡Huésped ingresado!!");
         
-        /* Limpiar campos de texto*/
-        jTNom.setText(""); jTDni.setText(""); jTDom.setText("");
-        jTCorr.setText(""); jTCel.setText("");
         
     }//GEN-LAST:event_jBAgregarHActionPerformed
 
@@ -238,34 +282,28 @@ public class VistaHuespedes extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTNomActionPerformed
 
-    private void jBSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalirActionPerformed
-        // TODO add your handling code here:
-          try {
-            this.setClosed(true);
-        } catch (PropertyVetoException ex) {
-            Logger.getLogger(VistaHuespedes.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_jBSalirActionPerformed
-    
-    
-    private void jBActualizarActionPerformed(java.awt.event.ActionEvent evt) {                                             
-
+    private void jBActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBActualizarActionPerformed
+        
         nombre = jTNom.getText();
         dni = Integer.parseInt(jTDni.getText());
         domicilio = jTDom.getText();
         correo = jTCorr.getText();
-        celular= Long.parseLong(jTCel.getText());
+        celular = jTCel.getText();
         
-        Huesped huesped=new Huesped(id_huesped ,nombre ,dni ,domicilio ,correo ,celular );
+        id_huesped = huespedData.buscarHuespedPorDni(dni).getId_huesped();
+        Huesped huesped =new Huesped(id_huesped ,nombre ,dni ,domicilio ,correo ,celular);
+        
         huespedData.actualizarHuesped(huesped);
+        JOptionPane.showMessageDialog(this, "¡¡Datos de Huésped actualizado!!");
         
-    } 
-    
-    
-    private void jBInformeHActionPerformed(java.awt.event.ActionEvent evt) {                                         
+        
+        
+    }//GEN-LAST:event_jBActualizarActionPerformed
 
-        int porDni = Integer.parseInt(jTDni.getText());
+    private void BuscarXDNIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarXDNIActionPerformed
+        // TODO add your handling code here:
         
+        int porDni = Integer.parseInt(JOptionPane.showInputDialog("Ingrese DNI del Huésped"));
         Huesped huesped = huespedData.buscarHuespedPorDni(porDni);
         
         if(huesped!=null){
@@ -275,15 +313,27 @@ public class VistaHuespedes extends javax.swing.JInternalFrame {
             jTCorr.setText(huesped.getCorreo());
             jTCel.setText(huesped.getCelular()+"");
             id_huesped = huesped.getId_huesped();
+        }else{
+            JOptionPane.showMessageDialog(this, "El Huésped no se encuentra cargado\n Complete los campos para agregar uno nuevo");
         }
-    }                                        
+    }//GEN-LAST:event_BuscarXDNIActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
+        jTNom.setText(""); jTDni.setText(""); jTDom.setText("");
+        jTCorr.setText(""); jTCel.setText("");
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+    
+       
+   
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BuscarXDNI;
     private javax.swing.JButton jBActualizar;
     private javax.swing.JButton jBAgregarH;
     private javax.swing.JButton jBBorrarH;
-    private javax.swing.JButton jBInformeH;
-    private javax.swing.JButton jBSalir;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLCelular;
     private javax.swing.JLabel jLCorreo;
     private javax.swing.JLabel jLDni;
@@ -293,6 +343,7 @@ public class VistaHuespedes extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JTextField jTCel;
     private javax.swing.JTextField jTCorr;
     private javax.swing.JTextField jTDni;
