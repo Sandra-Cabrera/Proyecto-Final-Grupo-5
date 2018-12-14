@@ -46,6 +46,18 @@ private HabitacionData habitacionData;
         Buscar = new javax.swing.JButton();
         tipo = new javax.swing.JComboBox<>();
         cancelar = new javax.swing.JButton();
+        nuevahabitacion = new javax.swing.JLabel();
+        cancelar1 = new javax.swing.JButton();
+        numero1 = new javax.swing.JLabel();
+        piso = new javax.swing.JLabel();
+        estado = new javax.swing.JLabel();
+        ocupado = new javax.swing.JRadioButton();
+        libre = new javax.swing.JRadioButton();
+        tipodehabitacion = new javax.swing.JLabel();
+        ingresenumero = new javax.swing.JTextField();
+        ingresepiso = new javax.swing.JTextField();
+        ingresetipo = new javax.swing.JComboBox<>();
+        guardar = new javax.swing.JButton();
 
         numero.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         numero.setModel(new javax.swing.table.DefaultTableModel(
@@ -86,6 +98,64 @@ private HabitacionData habitacionData;
             }
         });
 
+        nuevahabitacion.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        nuevahabitacion.setText("Nueva Habitacion");
+
+        cancelar1.setText("Cancelar");
+        cancelar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelar1ActionPerformed(evt);
+            }
+        });
+
+        numero1.setText("Numero");
+
+        piso.setText("Piso");
+
+        estado.setText("Estado");
+
+        ocupado.setText("Ocupado");
+        ocupado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ocupadoActionPerformed(evt);
+            }
+        });
+
+        libre.setText("Libre");
+        libre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                libreActionPerformed(evt);
+            }
+        });
+
+        tipodehabitacion.setText("Tipo de habitacion");
+
+        ingresenumero.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ingresenumeroActionPerformed(evt);
+            }
+        });
+
+        ingresepiso.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ingresepisoActionPerformed(evt);
+            }
+        });
+
+        ingresetipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Estandar Simple", "Doble ", "Triple", "Suite Lujo" }));
+        ingresetipo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ingresetipoActionPerformed(evt);
+            }
+        });
+
+        guardar.setText("Guardar");
+        guardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                guardarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -93,32 +163,81 @@ private HabitacionData habitacionData;
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(185, 185, 185)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(listadehabitaciones, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(tipo, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(Buscar)
-                                .addGap(18, 18, 18)
-                                .addComponent(cancelar))))
+                        .addGap(176, 176, 176)
+                        .addComponent(nuevahabitacion, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 585, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(30, Short.MAX_VALUE))
+                        .addGap(21, 21, 21)
+                        .addComponent(tipodehabitacion, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(ingresetipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(31, 31, 31)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(numero1, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(piso, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(estado, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(ingresepiso, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(ingresenumero, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(ocupado)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(libre, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(guardar))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(listadehabitaciones, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(14, 14, 14)
+                                .addComponent(tipo, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(Buscar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(cancelar))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(40, 40, 40)
+                                .addComponent(cancelar1))))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 585, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(214, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(listadehabitaciones, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(nuevahabitacion)
+                .addGap(15, 15, 15)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Buscar)
-                    .addComponent(tipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cancelar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(numero1)
+                    .addComponent(ingresenumero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(guardar)
+                    .addComponent(cancelar1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(piso)
+                    .addComponent(ingresepiso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(ocupado)
+                    .addComponent(libre)
+                    .addComponent(estado))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tipodehabitacion)
+                    .addComponent(ingresetipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(tipo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(Buscar)
+                            .addComponent(cancelar)))
+                    .addComponent(listadehabitaciones, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(172, Short.MAX_VALUE))
+                .addGap(19, 19, 19))
         );
 
         pack();
@@ -141,15 +260,61 @@ private HabitacionData habitacionData;
         // TODO add your handling code here:
     }//GEN-LAST:event_BuscarActionPerformed
 
+    private void cancelar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelar1ActionPerformed
+        // TODO add your handling code here:
+        try {
+            this.setClosed(true);
+        } catch (PropertyVetoException ex) {
+            Logger.getLogger(nuevahabitacion.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_cancelar1ActionPerformed
+
+    private void ocupadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ocupadoActionPerformed
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_ocupadoActionPerformed
+
+    private void libreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_libreActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_libreActionPerformed
+
+    private void ingresenumeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ingresenumeroActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ingresenumeroActionPerformed
+
+    private void ingresepisoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ingresepisoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ingresepisoActionPerformed
+
+    private void ingresetipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ingresetipoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ingresetipoActionPerformed
+
+    private void guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_guardarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Buscar;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JButton cancelar;
+    private javax.swing.JButton cancelar1;
+    private javax.swing.JLabel estado;
+    private javax.swing.JButton guardar;
+    private javax.swing.JTextField ingresenumero;
+    private javax.swing.JTextField ingresepiso;
+    private javax.swing.JComboBox<String> ingresetipo;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JRadioButton libre;
     private javax.swing.JLabel listadehabitaciones;
+    private javax.swing.JLabel nuevahabitacion;
     private javax.swing.JTable numero;
+    private javax.swing.JLabel numero1;
+    private javax.swing.JRadioButton ocupado;
+    private javax.swing.JLabel piso;
     private javax.swing.JComboBox<String> tipo;
+    private javax.swing.JLabel tipodehabitacion;
     // End of variables declaration//GEN-END:variables
 }
