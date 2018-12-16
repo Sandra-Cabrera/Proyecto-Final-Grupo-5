@@ -441,13 +441,14 @@ public class VistaHuespedes extends javax.swing.JInternalFrame {
      
             for(Reserva r:listaDeReservas){
                if(r.getHuesped().getDni()==dniI){
-                   
+                     System.out.println(r.getHabitacion().getTipo_de_habitacion());
                     modelo.addRow(new Object[]{
                         r.getId_reserva(),
                         estado(r.getEstado()), 
                         r.getIngreso(),
                         r.getEgreso(),
                         r.getHabitacion().getNumero(),
+                      
                         r.getHabitacion().getTipo_de_habitacion().getTipo(),
                         r.getImporte_total()});
                     }           
