@@ -68,7 +68,7 @@ public class HuespedData {
     
     
     
-    public List<Huesped> obtenerHuesped(){
+    public List<Huesped> obtenerHuespedes(){
         List<Huesped> huespedes = new ArrayList<Huesped>();
            
         try {
