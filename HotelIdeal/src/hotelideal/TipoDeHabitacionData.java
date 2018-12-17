@@ -35,7 +35,7 @@ public class TipoDeHabitacionData {
     //metodo guardar un tipo de habitacion con todos sus campos
     public void guardarTipoDeHabitaion(TipoDeHabitacion tipoDeHabitacion){
         try {
-            String sql = "INSERT INTO tipoDeHabitacion ( tipo , max_personas , cant_camas , tipo_camas , precio_noche ) VALUES ( ? , ? , ? , ? , ? );";
+            String sql = "INSERT INTO tipo_de_habitacion ( tipo , max_personas , cant_camas , tipo_camas , precio_noche ) VALUES ( ? , ? , ? , ? , ? );";
 
             PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             statement.setString(1, tipoDeHabitacion.getTipo());
@@ -67,7 +67,7 @@ public class TipoDeHabitacionData {
             
 
         try {
-            String sql = "SELECT * FROM tipoDeHabitacion;";
+            String sql = "SELECT * FROM tipo_de_habitacion;";
             
             PreparedStatement statement = connection.prepareStatement(sql);
             ResultSet resultSet = statement.executeQuery();
@@ -98,7 +98,7 @@ public class TipoDeHabitacionData {
     
         try {  
         
-                String sql = "DELETE FROM tipoDeHabitacion WHERE id_tipo_de_habitacion = ?;";
+                String sql = "DELETE FROM tipo_de_habitacion WHERE id_tipo_de_habitacion = ?;";
            
                 PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
                 statement.setInt(1, id_tipo_de_habitacion);
@@ -118,7 +118,7 @@ public class TipoDeHabitacionData {
          
         try {
              
-             String sql = "UPDATE tipoDeHabitacion SET tipo = ? , max_personas = ? , cant_camas = ? , tipo_camas = ? , precio_noche = ? WHERE id_tipo_de_habitacion = ? ;";
+             String sql = "UPDATE tipo_de_habitacion SET tipo = ? , max_personas = ? , cant_camas = ? , tipo_camas = ? , precio_noche = ? WHERE id_tipo_de_habitacion = ? ;";
              
              PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
              
@@ -144,7 +144,7 @@ public class TipoDeHabitacionData {
         TipoDeHabitacion tipoDeHabitacion = null;
         try {
             
-            String sql = "SELECT * FROM tipoDeHabitacion WHERE id_tipo_de_habitacion = ? ;";
+            String sql = "SELECT * FROM tipo_de_habitacion WHERE id_tipo_de_habitacion = ? ;";
 
             PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             statement.setInt(1, id_tipo_de_habitacion);
