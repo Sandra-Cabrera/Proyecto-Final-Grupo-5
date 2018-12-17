@@ -415,7 +415,7 @@ public class VistaHuespedes extends javax.swing.JInternalFrame {
         armaCabeceraTablaListar();
         
         for(Reserva r:listaDeReservas){
-          if(r.getHabitacion().getEstado()){
+          if(r.getHabitacion().isEstado()){
              modelo.addRow(new Object[]{r.getHuesped().getNombre(),
                 r.getHuesped().getDni(),
                 r.getHuesped().getDomicilio(), 
