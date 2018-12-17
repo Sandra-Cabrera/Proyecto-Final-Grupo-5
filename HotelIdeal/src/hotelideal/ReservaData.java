@@ -6,6 +6,7 @@
 package hotelideal;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -36,15 +37,16 @@ public class ReservaData {
     //metodo guardar una reserva con todos sus campos
     public void crearReserva(Reserva reserva){
         try {
-            String sql = "INSERT INTO reserva ( ingreso , egreso , importe_total , id_huesped , id_habitacion )  VALUES ( ? , ? , ? , ? , ? , ? );";
+            String sql = "INSERT INTO reserva ( ingreso , egreso , importe_total , estado, cantidad_personas, id_huesped , id_habitacion )  VALUES ( ? , ? , ? , ? , ? , ? );";
 
             PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            statement.setDate(1, reserva.getIngreso());
-            statement.setDate(2, reserva.getEgreso());
+            statement.setDate(1, Date.valueOf(reserva.getIngreso()));
+            statement.setDate(2, Date.valueOf(reserva.getEgreso()));
             statement.setDouble(3, reserva.getImporte_total());
             statement.setBoolean(4, reserva.getEstado());
-            statement.setInt(5, reserva.getHuesped().getId_huesped());
-            statement.setInt(6, reserva.getHabitacion().getId_habitacion());
+            statement.setInt(5, reserva.getCantidad_personas());
+            statement.setInt(6, reserva.getHuesped().getId_huesped());
+            statement.setInt(7, reserva.getHabitacion().getId_habitacion());
             
             statement.executeUpdate();
             
@@ -77,11 +79,12 @@ public class ReservaData {
             while(resultSet.next()){
                 reserva = new Reserva();
                 reserva.setId_reserva(resultSet.getInt("id_reserva"));
-                reserva.setIngreso(resultSet.getDate("ingreso"));
-                reserva.setEgreso(resultSet.getDate("egreso"));
+                reserva.setIngreso(resultSet.getDate("ingreso").toLocalDate());
+                reserva.setEgreso(resultSet.getDate("egreso").toLocalDate());
                 reserva.setImporte_total(resultSet.getDouble("importe_total"));
                 reserva.setEstado(resultSet.getBoolean("estado"));
-                 
+                reserva.setCantidad_personas(resultSet.getInt("cantidad_personas"));
+                
                 Huesped h = this.buscarHuesped(resultSet.getInt("id_huesped"));
                 reserva.setHuesped(h);
                 
@@ -125,17 +128,18 @@ public class ReservaData {
          
         try {
              
-             String sql = "UPDATE reserva SET ingreso = ? , egreso = ? , importe_total = ? , estado = ? WHERE id_reserva = ? ;";
+             String sql = "UPDATE reserva SET ingreso = ? , egreso = ? , importe_total = ? , estado = ? , cantidad_personas = ? WHERE id_reserva = ? ;";
              
              PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
              
-                statement.setDate(1, reserva.getIngreso());
-                statement.setDate(2, reserva.getEgreso());
+                statement.setDate(1, Date.valueOf(reserva.getIngreso()));
+                statement.setDate(2, Date.valueOf(reserva.getEgreso()));
                 statement.setDouble(3, reserva.getImporte_total());
                 statement.setBoolean(4, reserva.getEstado());
-                statement.setInt(5, reserva.getHuesped().getId_huesped());
-                statement.setInt(6, reserva.getHabitacion().getId_habitacion());
-                statement.setInt(7, reserva.getId_reserva());
+                statement.setInt(5, reserva.getCantidad_personas());
+                statement.setInt(6, reserva.getHuesped().getId_huesped());
+                statement.setInt(7, reserva.getHabitacion().getId_habitacion());
+                statement.setInt(8, reserva.getId_reserva());
                 
                 statement.executeUpdate();
           
@@ -164,9 +168,10 @@ public class ReservaData {
             while(resultSet.next()){
                 reserva = new Reserva();
                 reserva.setId_reserva(resultSet.getInt("id_reserva"));
-                reserva.setIngreso(resultSet.getDate("ingreso")); 
-                reserva.setEgreso(resultSet.getDate("egreso"));
+                reserva.setIngreso(resultSet.getDate("ingreso").toLocalDate()); 
+                reserva.setEgreso(resultSet.getDate("egreso").toLocalDate());
                 reserva.setImporte_total(resultSet.getDouble("importe_total"));
+                reserva.setCantidad_personas(resultSet.getInt("cantidad_personas"));
                 
                 Huesped h = this.buscarHuesped(resultSet.getInt("id_huesped"));
                 reserva.setHuesped(h);
@@ -201,9 +206,10 @@ public class ReservaData {
             while(resultSet.next()){
                 reserva = new Reserva();
                 reserva.setId_reserva(resultSet.getInt("id_reserva"));
-                reserva.setIngreso(resultSet.getDate("ingreso")); 
-                reserva.setEgreso(resultSet.getDate("egreso"));
+                reserva.setIngreso(resultSet.getDate("ingreso").toLocalDate()); 
+                reserva.setEgreso(resultSet.getDate("egreso").toLocalDate());
                 reserva.setImporte_total(resultSet.getDouble("importe_total"));
+                reserva.setCantidad_personas(resultSet.getInt("cantidad_personas"));
                 
                 Huesped h = this.buscarHuesped(resultSet.getInt("id_huesped"));
                 reserva.setHuesped(h);
@@ -235,9 +241,10 @@ public class ReservaData {
             while(resultSet.next()){
                 reserva = new Reserva();
                 reserva.setId_reserva(resultSet.getInt("id_reserva"));
-                reserva.setIngreso(resultSet.getDate("ingreso")); 
-                reserva.setEgreso(resultSet.getDate("egreso"));
+                reserva.setIngreso(resultSet.getDate("ingreso").toLocalDate()); 
+                reserva.setEgreso(resultSet.getDate("egreso").toLocalDate());
                 reserva.setImporte_total(resultSet.getDouble("importe_total"));
+                reserva.setCantidad_personas(resultSet.getInt("cantidad_personas"));
                 
                 Huesped h = this.buscarHuesped(resultSet.getInt("id_huesped"));
                 reserva.setHuesped(h);
@@ -280,4 +287,22 @@ public class ReservaData {
                 
         return hab;
     }
+     public void actualizarEstado(boolean estado, int num){
+        try {
+            
+            String sql = "UPDATE habitacion SET estado = ? WHERE num = ?;";
+
+            PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            statement.setBoolean(1, estado);
+            statement.setInt(2, num);
+            statement.executeUpdate();
+    
+            statement.close();
+    
+        } catch (SQLException ex) {
+            System.out.println("Error al actualizar el ESTADO de habitación: " + ex.getMessage());
+        }
+    
+    }
+     
 }

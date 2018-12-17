@@ -42,7 +42,7 @@ public class HabitacionData {
             PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             statement.setInt(1, habitacion.getNumero());
             statement.setInt(2, habitacion.getPiso());
-            statement.setBoolean(3, habitacion.getEstado());
+            statement.setBoolean(3, habitacion.isEstado());
             statement.setInt(4, habitacion.getTipo_de_habitacion().getId_tipo_de_habitacion());
             
             statement.executeUpdate();
@@ -129,7 +129,7 @@ public class HabitacionData {
              
                 statement.setInt(1, habitacion.getNumero());
                 statement.setInt(2, habitacion.getPiso());
-                statement.setBoolean(3, habitacion.getEstado());
+                statement.setBoolean(3, habitacion.isEstado());
                 statement.setInt(4, habitacion.getTipo_de_habitacion().getId_tipo_de_habitacion());
                 statement.setInt(5, habitacion.getId_habitacion());
                 statement.executeUpdate();

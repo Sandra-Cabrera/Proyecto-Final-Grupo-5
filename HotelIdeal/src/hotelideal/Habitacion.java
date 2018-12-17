@@ -34,6 +34,10 @@ public class Habitacion {
      public Habitacion() {
         id_habitacion=-1;
     }
+
+    public Habitacion(int id_habitacion) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
     public int getId_habitacion() {
         return id_habitacion;
@@ -59,7 +63,7 @@ public class Habitacion {
         this.piso = piso;
     }
 
-    public boolean getEstado() {
+    public boolean isEstado() {
         return estado;
     }
 

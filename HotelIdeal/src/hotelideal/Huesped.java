@@ -39,6 +39,10 @@ public class Huesped {
         id_huesped=-1;
     }
 
+    public Huesped(int id_huesped) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     public int getId_huesped() {
         return id_huesped;
     }

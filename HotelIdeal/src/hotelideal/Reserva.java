@@ -6,6 +6,7 @@
 package hotelideal;
 
 import java.sql.Date;
+import java.time.LocalDate;
 
 /**
  *
@@ -13,26 +14,29 @@ import java.sql.Date;
  */
 public class Reserva {
     private int id_reserva;
-    private Date ingreso;
-    private Date egreso;
+    private LocalDate ingreso;
+    private LocalDate egreso;
     private double importe_total;
     private boolean estado;
     private Huesped huesped;
     private Habitacion habitacion;
+    private int cantidad_personas;
 
-    public Reserva(int id_reserva, Date ingreso, Date egreso, double importe_total, boolean estado, Huesped huesped, Habitacion habitacion) {
+    public Reserva(int id_reserva, LocalDate ingreso, LocalDate egreso, int cantidad_personas, double importe_total, boolean estado, Huesped huesped, Habitacion habitacion) {
         this.id_reserva = id_reserva;
         this.ingreso = ingreso;
         this.egreso = egreso;
+        this.cantidad_personas = cantidad_personas;
         this.importe_total = importe_total;
         this.estado = estado;
         this.huesped = huesped;
         this.habitacion = habitacion;
     }
         
-    public Reserva(Date ingreso, Date egreso, double importe_total, boolean estado, Huesped huesped, Habitacion habitacion) {
+    public Reserva(LocalDate ingreso, LocalDate egreso, int cantidad_personas, double importe_total, boolean estado, Huesped huesped, Habitacion habitacion) {
         this.ingreso = ingreso;
         this.egreso = egreso;
+        this.cantidad_personas = cantidad_personas;
         this.importe_total = importe_total;
         this.estado = estado;
         this.huesped = huesped;
@@ -43,6 +47,10 @@ public class Reserva {
         id_reserva=-1;
     }
 
+    public Reserva(Date ingreso, Date egreso, double importe_total, int id_huesped, int id_habitacion) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     public int getId_reserva() {
         return id_reserva;
     }
@@ -51,19 +59,19 @@ public class Reserva {
         this.id_reserva = id_reserva;
     }
 
-    public Date getIngreso() {
+    public LocalDate getIngreso() {
         return ingreso;
     }
 
-    public void setIngreso(Date ingreso) {
+    public void setIngreso(LocalDate ingreso) {
         this.ingreso = ingreso;
     }
 
-    public Date getEgreso() {
+    public LocalDate getEgreso() {
         return egreso;
     }
 
-    public void setEgreso(Date egreso) {
+    public void setEgreso(LocalDate egreso) {
         this.egreso = egreso;
     }
 
@@ -103,8 +111,11 @@ public class Reserva {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public Object getTipoDeHabitacion() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+   public int getCantidad_personas() {
+        return cantidad_personas;
     }
-    
+
+    public void setCantidad_personas(int cantidad_personas) {
+        this.cantidad_personas = cantidad_personas;
+    } 
 }
