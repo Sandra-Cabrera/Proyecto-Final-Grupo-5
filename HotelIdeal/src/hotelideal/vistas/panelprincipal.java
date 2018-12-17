@@ -13,6 +13,10 @@ import javax.swing.JFrame;
  */
 public class panelprincipal extends javax.swing.JFrame {
 
+    static void centrarVentana(VistaHuespedes vdh) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     /**
      * Creates new form panelprincipal
      */
@@ -37,7 +41,6 @@ public class panelprincipal extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         reserva = new javax.swing.JMenu();
         nuevareserva = new javax.swing.JMenuItem();
-        modificarreserva = new javax.swing.JMenuItem();
         habitacion = new javax.swing.JMenu();
         listadohabitaciones = new javax.swing.JMenuItem();
         nuevahabitacion = new javax.swing.JMenuItem();
@@ -90,14 +93,6 @@ public class panelprincipal extends javax.swing.JFrame {
             }
         });
         reserva.add(nuevareserva);
-
-        modificarreserva.setText("Modificar/Cancelar");
-        modificarreserva.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                modificarreservaActionPerformed(evt);
-            }
-        });
-        reserva.add(modificarreserva);
 
         jMenuBar1.add(reserva);
 
@@ -192,23 +187,11 @@ public class panelprincipal extends javax.swing.JFrame {
         //escritorio.add(vh);
     }//GEN-LAST:event_VistaHuespedesActionPerformed
 
-    private void modificarreservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarreservaActionPerformed
-        // TODO add your handling code here:
-        escritorio.removeAll();
-        escritorio.repaint();
-        modificarreserva vh=new modificarreserva();
-        vh.setVisible(true);
-        //vh.setLocation(200, 50);
-        escritorio.add(vh);
-        escritorio.moveToFront(vh);
-        //escritorio.add(vh);
-    }//GEN-LAST:event_modificarreservaActionPerformed
-
     private void nuevareservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevareservaActionPerformed
         // TODO add your handling code here:
         escritorio.removeAll();
         escritorio.repaint();
-        nuevareserva vh=new nuevareserva();
+        reserva vh=new reserva();
         vh.setVisible(true);
         //vh.setLocation(200, 50);
         escritorio.add(vh);
@@ -298,7 +281,6 @@ public class panelprincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem listadohabitaciones;
     private javax.swing.JMenuItem modificarhabitacion;
-    private javax.swing.JMenuItem modificarreserva;
     private javax.swing.JMenuItem nuevahabitacion;
     private javax.swing.JMenuItem nuevareserva;
     private javax.swing.JMenuItem quitarhabitacion;
